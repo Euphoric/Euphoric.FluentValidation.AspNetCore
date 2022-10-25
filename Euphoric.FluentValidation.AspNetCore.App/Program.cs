@@ -10,12 +10,7 @@ public class Program
 
 // Add services to the container.
 
-        builder.Services.AddControllers(options =>
-        {
-            // removes default validation of nullable references
-            //options.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true;
-            options.Filters.Add<ValidationActionFilter>();
-        });
+        builder.Services.AddControllers();
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
         builder.Services.AddHealthChecks();
