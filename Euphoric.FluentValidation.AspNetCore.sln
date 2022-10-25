@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Euphoric.FluentValidation.AspNetCore", "Euphoric.FluentValidation.AspNetCore\Euphoric.FluentValidation.AspNetCore.csproj", "{3F0C8C33-B7C5-4EC1-87A8-3FCECD52B57B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Euphoric.FluentValidation.AspNetCore.Test", "Euphoric.FluentValidation.AspNetCore.Test\Euphoric.FluentValidation.AspNetCore.Test.csproj", "{AB3719A3-2D62-466E-9198-E3A2CDBED4C1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Euphoric.FluentValidation.AspNetCore.App", "Euphoric.FluentValidation.AspNetCore.App\Euphoric.FluentValidation.AspNetCore.App.csproj", "{83A0CA92-FDE7-499B-A6A2-9A8C1D1EE4F7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3F0C8C33-B7C5-4EC1-87A8-3FCECD52B57B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F0C8C33-B7C5-4EC1-87A8-3FCECD52B57B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F0C8C33-B7C5-4EC1-87A8-3FCECD52B57B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F0C8C33-B7C5-4EC1-87A8-3FCECD52B57B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB3719A3-2D62-466E-9198-E3A2CDBED4C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB3719A3-2D62-466E-9198-E3A2CDBED4C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB3719A3-2D62-466E-9198-E3A2CDBED4C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB3719A3-2D62-466E-9198-E3A2CDBED4C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{83A0CA92-FDE7-499B-A6A2-9A8C1D1EE4F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83A0CA92-FDE7-499B-A6A2-9A8C1D1EE4F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83A0CA92-FDE7-499B-A6A2-9A8C1D1EE4F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83A0CA92-FDE7-499B-A6A2-9A8C1D1EE4F7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
