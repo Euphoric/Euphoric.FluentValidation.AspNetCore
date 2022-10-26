@@ -1,0 +1,16 @@
+﻿{
+    "errors": [
+        {
+            "propertyName": "CustomProperty",
+            "errorCode": "CUSTOM_VALIDATION",
+            "attemptedValue": "30",
+            "errorMessage": "Custom validation error."
+        }
+    ],
+    "type": "https://tools.ietf.org/html/rfc7231#section-6.5.1",
+    "title": "One or more validation errors occurred.",
+    "status": 400,
+    "detail": "Custom validation error.",
+    "instance": null,
+    "traceId": "00-37be1758609afda059cc901e1ba893ec-0000000000000000-00"
+}

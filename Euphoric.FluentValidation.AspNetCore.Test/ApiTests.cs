@@ -67,4 +67,16 @@ public class ApiTests : IClassFixture<TestServerFixture>
         
         Approvals.VerifyJson(FixTraceId(await response.Content.ReadAsStringAsync()));
     }
+    
+    [Fact]
+    public async Task Handles_validation_exception()
+    {
+        var httpClient = Fixture.CreateClient();
+        httpClient.DefaultRequestHeaders.Add("traceparent","00-37be1758609afda059cc901e1ba893ec-15476cceff3adf10-00");
+        var response = await httpClient.GetAsync("order/error");
+        
+        Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
+        
+        Approvals.VerifyJson(FixTraceId(await response.Content.ReadAsStringAsync()));
+    }
 }

@@ -1,7 +1,5 @@
-﻿using System.Diagnostics;
-using FluentValidation;
+﻿using FluentValidation;
 using FluentValidation.Results;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
@@ -24,7 +22,7 @@ public class ValidationActionFilter : IAsyncActionFilter
         
         if (!validationResult.IsValid)
         {
-            context.Result = new BadRequestObjectResult( ModelValidationProblemDetails.Build(validationResult, GetTraceId(context.HttpContext)));
+            context.Result = new BadRequestObjectResult( ValidationProblemDetailsBuilder.Build(validationResult, context.HttpContext));
         }
         else
         {
@@ -57,10 +55,5 @@ public class ValidationActionFilter : IAsyncActionFilter
 
         var validatorType = typeof(IValidator<>).MakeGenericType(type);
         return serviceProvider.GetService(validatorType) as IValidator;
-    }
-
-    private static string GetTraceId(HttpContext httpContext)
-    {
-        return Activity.Current?.Id ?? httpContext.TraceIdentifier;
     }
 }

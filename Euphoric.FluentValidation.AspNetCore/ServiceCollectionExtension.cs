@@ -12,7 +12,11 @@ public static class ServiceCollectionExtension
         services.AddSingleton<IObjectModelValidator, NullObjectModelValidator>();
 
         // register MVC filters in MVC
-        Action<MvcOptions> setupAction = options => options.Filters.Add<ValidationActionFilter>();
+        Action<MvcOptions> setupAction = options =>
+        {
+            options.Filters.Add<ValidationActionFilter>();
+            options.Filters.Add<ValidationExceptionFilter>();
+        };
         services.Configure(setupAction);
 
         return services;
