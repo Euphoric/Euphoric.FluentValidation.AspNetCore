@@ -2,6 +2,7 @@
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Euphoric.FluentValidation.AspNetCore;
 
@@ -22,7 +23,8 @@ public class ValidationActionFilter : IAsyncActionFilter
         
         if (!validationResult.IsValid)
         {
-            context.Result = new BadRequestObjectResult( ValidationProblemDetailsBuilder.Build(validationResult, context.HttpContext));
+            var problemBuilder = context.HttpContext.RequestServices.GetRequiredService<IValidationProblemDetailsBuilder>();
+            context.Result = new BadRequestObjectResult( problemBuilder.Build(validationResult, context.HttpContext));
         }
         else
         {

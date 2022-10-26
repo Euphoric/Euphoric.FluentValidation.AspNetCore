@@ -10,7 +10,8 @@ public static class ServiceCollectionExtension
     {
         // disables model validation using null validator
         services.AddSingleton<IObjectModelValidator, NullObjectModelValidator>();
-
+        services.AddSingleton<IValidationProblemDetailsBuilder, ValidationProblemDetailsBuilder>();
+        
         // register MVC filters in MVC
         Action<MvcOptions> setupAction = options =>
         {

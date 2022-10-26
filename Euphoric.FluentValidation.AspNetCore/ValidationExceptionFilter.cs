@@ -2,6 +2,7 @@
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Euphoric.FluentValidation.AspNetCore;
 
@@ -14,8 +15,10 @@ public class ValidationExceptionFilter : IAsyncExceptionFilter
     {
         if (context.Exception is ValidationException ex)
         {
+            var problemBuilder = context.HttpContext.RequestServices.GetRequiredService<IValidationProblemDetailsBuilder>();
+            
             context.ExceptionHandled = true;
-            context.Result = new BadRequestObjectResult(ValidationProblemDetailsBuilder.Build(new ValidationResult(ex.Errors), context.HttpContext));
+            context.Result = new BadRequestObjectResult(problemBuilder.Build(new ValidationResult(ex.Errors), context.HttpContext));
         }
 
         return Task.CompletedTask;
