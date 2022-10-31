@@ -1,8 +1,10 @@
 using System.Net;
 using System.Net.Http.Json;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using VerifyTests;
 using VerifyXunit;
 using Xunit;
 
@@ -11,6 +13,12 @@ namespace Euphoric.FluentValidation.AspNetCore;
 [UsesVerify]
 public class ApiTests : IClassFixture<TestServerFixture>
 {
+    [ModuleInitializer]
+    public static void Initialize()
+    {
+        VerifyHttp.Enable();
+    }
+
     private TestServerFixture Fixture { get; }
 
     public ApiTests(TestServerFixture fixture)
@@ -43,28 +51,24 @@ public class ApiTests : IClassFixture<TestServerFixture>
         var response = await httpClient.PostAsJsonAsync("order", emptyOrder);
         
         Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
-        
-        await Verifier.Verify(response.Content.ReadAsStreamAsync(), "json").AddScrubber(FixTraceId).AddScrubber(FormatJson);
+
+        await Verifier.Verify(response).AddScrubber(ScrubTraceId).AddScrubber(EscapeWhitespace).IgnoreMember("Request");
     }
 
-    private void FormatJson(StringBuilder sb)
+    private void EscapeWhitespace(StringBuilder sb)
     {
-        var formattedJson = sb.ToString().FormatJson();
-        sb.Clear();
-        sb.Append(formattedJson);
-    }
-
-    private void FixTraceId(StringBuilder sb)
-    {
-        var fixedStr = FixTraceId(sb.ToString());
-        sb.Clear();
-        sb.Append(fixedStr);
+        sb.Replace("\r", "\\r");
+        sb.Replace("\n", "\\n");
+        sb.Replace("\t", "\\t");
     }
     
-    private string FixTraceId(string responseJson)
+    private void ScrubTraceId(StringBuilder sb)
     {
-        var regex = @"(""traceId"":\s*""[\d\w]+-[\d\w]+-)([\d\w]+)(-[\d\w]+"")";
-        return Regex.Replace(responseJson, regex, match => match.Groups[1].Value + "0000000000000000" + match.Groups[3].Value);
+        var text = sb.ToString();
+        var regex = @"([\d\w]{2}-[\d\w]{32}-)([\d\w]{16})(-[\d\w]{2})";
+        var fix = Regex.Replace(text, regex, match => match.Groups[1].Value + "0000000000000000" + match.Groups[3].Value);
+        sb.Clear();
+        sb.Append(fix);
     }
 
     [Fact]
@@ -77,9 +81,7 @@ public class ApiTests : IClassFixture<TestServerFixture>
         httpClient.DefaultRequestHeaders.Add("traceparent","00-37be1758609afda059cc901e1ba893ec-15476cceff3adf10-00");
         var response = await httpClient.PostAsJsonAsync("order", invalidOrder);
         
-        Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
-        
-        await Verifier.Verify(response.Content.ReadAsStreamAsync(), "json").AddScrubber(FixTraceId).AddScrubber(FormatJson);
+        await Verifier.Verify(response).AddScrubber(ScrubTraceId).AddScrubber(EscapeWhitespace).IgnoreMember("Request");
     }
     
     [Fact]
@@ -88,9 +90,7 @@ public class ApiTests : IClassFixture<TestServerFixture>
         var httpClient = Fixture.CreateClient();
         httpClient.DefaultRequestHeaders.Add("traceparent","00-37be1758609afda059cc901e1ba893ec-15476cceff3adf10-00");
         var response = await httpClient.GetAsync("order/error");
-        
-        Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
-        
-        await Verifier.Verify(response.Content.ReadAsStreamAsync(), "json").AddScrubber(FixTraceId).AddScrubber(FormatJson);
+
+        await Verifier.Verify(response).AddScrubber(ScrubTraceId).AddScrubber(EscapeWhitespace).IgnoreMember("Request");
     }
 }

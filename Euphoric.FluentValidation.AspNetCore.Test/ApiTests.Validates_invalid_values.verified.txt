@@ -1,0 +1,61 @@
+﻿{
+  Version: 1.1,
+  Status: 400 Bad Request,
+  Content: {
+    Headers: {
+      Content-Type: application/problem+json; charset=utf-8
+    },
+    Value: {
+      errors: [
+        {
+          propertyName: Description,
+          errorCode: LengthValidator,
+          attemptedValue: 01234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789,
+          errorMessage: 'Description' must be between 1 and 100 characters. You entered 110 characters.
+        },
+        {
+          propertyName: Number,
+          errorCode: ExclusiveBetweenValidator,
+          attemptedValue: 25,
+          errorMessage: 'Number' must be between 10 and 20 (exclusive). You entered 25.
+        },
+        {
+          propertyName: CustomerName,
+          errorCode: MyErrorCode,
+          attemptedValue: invalid-name,
+          errorMessage: Asynchronous error - 'invalid-name' is not valid value for Customer Name
+        },
+        {
+          propertyName: OrderDetail.Address,
+          errorCode: NotEmptyValidator,
+          attemptedValue: ,
+          errorMessage: 'Address' must not be empty.
+        },
+        {
+          propertyName: OrderDetail.OrderName,
+          errorCode: NotEmptyValidator,
+          attemptedValue: null,
+          errorMessage: 'Order Name' must not be empty.
+        },
+        {
+          propertyName: Items[0].Name,
+          errorCode: NotEmptyValidator,
+          attemptedValue: ,
+          errorMessage: 'Name' must not be empty.
+        },
+        {
+          propertyName: Items[0].Price,
+          errorCode: ExclusiveBetweenValidator,
+          attemptedValue: 1000000,
+          errorMessage: 'Price' must be between 0 and 10000 (exclusive). You entered 1000000.
+        }
+      ],
+      type: https://tools.ietf.org/html/rfc7231#section-6.5.1,
+      title: One or more validation errors occurred.,
+      status: 400,
+      detail: 'Description' must be between 1 and 100 characters. You entered 110 characters.\r\n'Number' must be between 10 and 20 (exclusive). You entered 25.\r\nAsynchronous error - 'invalid-name' is not valid value for Customer Name\r\n'Address' must not be empty.\r\n'Order Name' must not be empty.\r\n'Name' must not be empty.\r\n'Price' must be between 0 and 10000 (exclusive). You entered 1000000.,
+      instance: null,
+      traceId: 00-37be1758609afda059cc901e1ba893ec-0000000000000000-00
+    }
+  }
+}
