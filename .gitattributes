@@ -1,0 +1,5 @@
+
+# Keep eol for Verify files
+*.verified.txt text eol=lf
+*.verified.xml text eol=lf
+*.verified.json text eol=lf
