@@ -20,7 +20,7 @@ public class ValidationProblemDetailsBuilder : IValidationProblemDetailsBuilder
             Status = (int)HttpStatusCode.BadRequest,
             Type = "https://tools.ietf.org/html/rfc7231#section-6.5.1",
             Title = "One or more validation errors occurred.",
-            Detail = validationResult.ToString(),
+            Detail = validationResult.ToString(" "),
             Errors = validationResult.Errors.Select(err=>new ModelValidationError(err.PropertyName, err.ErrorCode, err.AttemptedValue, err.ErrorMessage)).ToList(),
             Extensions =
             {

@@ -53,7 +53,7 @@
       type: https://tools.ietf.org/html/rfc7231#section-6.5.1,
       title: One or more validation errors occurred.,
       status: 400,
-      detail: 'Description' must be between 1 and 100 characters. You entered 110 characters.\r\n'Number' must be between 10 and 20 (exclusive). You entered 25.\r\nAsynchronous error - 'invalid-name' is not valid value for Customer Name\r\n'Address' must not be empty.\r\n'Order Name' must not be empty.\r\n'Name' must not be empty.\r\n'Price' must be between 0 and 10000 (exclusive). You entered 1000000.,
+      detail: 'Description' must be between 1 and 100 characters. You entered 110 characters. 'Number' must be between 10 and 20 (exclusive). You entered 25. Asynchronous error - 'invalid-name' is not valid value for Customer Name 'Address' must not be empty. 'Order Name' must not be empty. 'Name' must not be empty. 'Price' must be between 0 and 10000 (exclusive). You entered 1000000.,
       instance: null,
       traceId: 00-37be1758609afda059cc901e1ba893ec-0000000000000000-00
     }

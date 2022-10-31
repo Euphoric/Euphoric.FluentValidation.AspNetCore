@@ -47,7 +47,7 @@
       type: https://tools.ietf.org/html/rfc7231#section-6.5.1,
       title: One or more validation errors occurred.,
       status: 400,
-      detail: 'Customer Name' must not be empty.\r\n'Description' must not be empty.\r\n'Number' must be between 10 and 20 (exclusive). You entered 0.\r\nAsynchronous error - '' is not valid value for Customer Name\r\n'Items' must not be empty.\r\n'Order Detail' must not be empty.,
+      detail: 'Customer Name' must not be empty. 'Description' must not be empty. 'Number' must be between 10 and 20 (exclusive). You entered 0. Asynchronous error - '' is not valid value for Customer Name 'Items' must not be empty. 'Order Detail' must not be empty.,
       instance: null,
       traceId: 00-d25ce4e91664e7ee080019c7b58f1545-0000000000000000-00
     }
