@@ -6,6 +6,11 @@
         <OutputType>Library</OutputType>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <Title>Fluent Validation auto validation for AspNet Core</Title>
+        <Description>An integration of FluentValidations into ASP.NET Core not using standard validation model.</Description>
+        <PackageProjectUrl>https://github.com/Euphoric/Euphoric.FluentValidation.AspNetCore</PackageProjectUrl>
+        <PackageLicenseUrl>https://github.com/Euphoric/Euphoric.FluentValidation.AspNetCore/blob/main/LICENSE</PackageLicenseUrl>
+        <RepositoryUrl>https://github.com/Euphoric/Euphoric.FluentValidation.AspNetCore</RepositoryUrl>
     </PropertyGroup>
 
     <ItemGroup>
