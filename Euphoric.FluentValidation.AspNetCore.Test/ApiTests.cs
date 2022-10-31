@@ -1,14 +1,14 @@
 using System.Net;
 using System.Net.Http.Json;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using ApprovalTests;
-using ApprovalTests.Reporters;
+using VerifyXunit;
 using Xunit;
 
 namespace Euphoric.FluentValidation.AspNetCore;
 
-[UseReporter(typeof(DiffReporter))]
+[UsesVerify]
 public class ApiTests : IClassFixture<TestServerFixture>
 {
     private TestServerFixture Fixture { get; }
@@ -43,10 +43,24 @@ public class ApiTests : IClassFixture<TestServerFixture>
         var response = await httpClient.PostAsJsonAsync("order", emptyOrder);
         
         Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
-
-        Approvals.VerifyJson(FixTraceId(await response.Content.ReadAsStringAsync()));
+        
+        await Verifier.Verify(response.Content.ReadAsStreamAsync(), "json").AddScrubber(FixTraceId).AddScrubber(FormatJson);
     }
 
+    private void FormatJson(StringBuilder sb)
+    {
+        var formattedJson = sb.ToString().FormatJson();
+        sb.Clear();
+        sb.Append(formattedJson);
+    }
+
+    private void FixTraceId(StringBuilder sb)
+    {
+        var fixedStr = FixTraceId(sb.ToString());
+        sb.Clear();
+        sb.Append(fixedStr);
+    }
+    
     private string FixTraceId(string responseJson)
     {
         var regex = @"(""traceId"":\s*""[\d\w]+-[\d\w]+-)([\d\w]+)(-[\d\w]+"")";
@@ -65,7 +79,7 @@ public class ApiTests : IClassFixture<TestServerFixture>
         
         Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
         
-        Approvals.VerifyJson(FixTraceId(await response.Content.ReadAsStringAsync()));
+        await Verifier.Verify(response.Content.ReadAsStreamAsync(), "json").AddScrubber(FixTraceId).AddScrubber(FormatJson);
     }
     
     [Fact]
@@ -77,6 +91,6 @@ public class ApiTests : IClassFixture<TestServerFixture>
         
         Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
         
-        Approvals.VerifyJson(FixTraceId(await response.Content.ReadAsStringAsync()));
+        await Verifier.Verify(response.Content.ReadAsStreamAsync(), "json").AddScrubber(FixTraceId).AddScrubber(FormatJson);
     }
 }
