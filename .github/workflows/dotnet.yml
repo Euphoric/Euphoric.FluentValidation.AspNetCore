@@ -27,4 +27,4 @@ jobs:
     - name: Build
       run: dotnet build --no-restore --configuration $BUILD_CONFIG
     - name: Test
-      run: dotnet test /p:Configuration=$env:BUILD_CONFIG --no-build --verbosity normal
+      run: dotnet test /p:Configuration=$BUILD_CONFIG --no-build --verbosity normal
