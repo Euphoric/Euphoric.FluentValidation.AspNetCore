@@ -1,10 +1,8 @@
 using System.Net;
 using System.Net.Http.Json;
-using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using VerifyTests;
 using VerifyXunit;
 using Xunit;
 
@@ -13,12 +11,6 @@ namespace Euphoric.FluentValidation.AspNetCore;
 [UsesVerify]
 public class ApiTests : IClassFixture<TestServerFixture>
 {
-    [ModuleInitializer]
-    public static void Initialize()
-    {
-        VerifyHttp.Enable();
-    }
-
     private TestServerFixture Fixture { get; }
 
     public ApiTests(TestServerFixture fixture)
