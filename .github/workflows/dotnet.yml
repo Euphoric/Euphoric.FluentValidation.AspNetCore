@@ -37,4 +37,4 @@ jobs:
       run: dotnet test /p:Configuration=$BUILD_CONFIG --no-build --verbosity normal
     - name: Publish
       if: startsWith(github.ref, 'refs/heads/main')
-      run: dotnet nuget push Euphoric.FluentValidation.AspNetCore\bin\Release\Euphoric.FluentValidation.AspNetCore.*.nupkg -s 'https://api.nuget.org/v3/index.json' -k ${{secrets.NUGET_API_KEY}}
+      run: dotnet nuget push "Euphoric.FluentValidation.AspNetCore\bin\Release\Euphoric.FluentValidation.AspNetCore.*.nupkg" -s 'https://api.nuget.org/v3/index.json' -k ${{secrets.NUGET_API_KEY}}
