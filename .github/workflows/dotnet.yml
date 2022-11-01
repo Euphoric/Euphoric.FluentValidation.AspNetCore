@@ -21,7 +21,8 @@ jobs:
     - name: Calculate NuGet version
       id: version
       uses: paulhatch/semantic-version@v5.0.0-alpha2
-      bump_each_commit: true
+      with:
+        bump_each_commit: true
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
       with:
