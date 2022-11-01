@@ -28,6 +28,6 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
-      run: dotnet build --no-restore --configuration $BUILD_CONFIG -p:Version=${{ version }}
+      run: dotnet build --no-restore --configuration $BUILD_CONFIG -p:Version=${version}
     - name: Test
       run: dotnet test /p:Configuration=$BUILD_CONFIG --no-build --verbosity normal
