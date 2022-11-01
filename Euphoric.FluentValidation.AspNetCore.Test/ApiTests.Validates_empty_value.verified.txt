@@ -23,7 +23,9 @@
           propertyName: Number,
           errorCode: ExclusiveBetweenValidator,
           attemptedValue: 0,
-          errorMessage: 'Number' must be between 10 and 20 (exclusive). You entered 0.
+          errorMessage: 'Number' must be between 10 and 20 (exclusive). You entered 0.,
+          From: 10,
+          To: 20
         },
         {
           propertyName: CustomerName,

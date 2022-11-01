@@ -13,7 +13,7 @@ public interface IValidationProblemDetailsBuilder
 
 public class ValidationProblemDetailsBuilder : IValidationProblemDetailsBuilder
 {
-    public ProblemDetails Build(ValidationResult validationResult, HttpContext httpContext)
+    public virtual ProblemDetails Build(ValidationResult validationResult, HttpContext httpContext)
     {
         var problemDetails = new ModelValidationProblemDetails
         {
@@ -21,7 +21,7 @@ public class ValidationProblemDetailsBuilder : IValidationProblemDetailsBuilder
             Type = "https://tools.ietf.org/html/rfc7231#section-6.5.1",
             Title = "One or more validation errors occurred.",
             Detail = validationResult.ToString(" "),
-            Errors = validationResult.Errors.Select(err=>new ModelValidationError(err.PropertyName, err.ErrorCode, err.AttemptedValue, err.ErrorMessage)).ToList(),
+            Errors = validationResult.Errors.Select(BuildErrorDetail).ToList(),
             Extensions =
             {
                 ["traceId"] = GetTraceId(httpContext)
@@ -29,6 +29,25 @@ public class ValidationProblemDetailsBuilder : IValidationProblemDetailsBuilder
         };
 
         return problemDetails;
+    }
+
+    protected virtual ModelValidationError BuildErrorDetail(ValidationFailure failure)
+    {
+        var ignoredKeys = new HashSet<string> { "PropertyName", "PropertyValue", "CollectionIndex" };
+        var extensionValue = 
+            failure.FormattedMessagePlaceholderValues?
+                .Where(x=>!ignoredKeys.Contains(x.Key))
+                .ToDictionary(x=>x.Key, x=>(object?)x.Value) 
+            ?? new Dictionary<string, object?>();
+        var modelValidationError = new ModelValidationError
+        {
+            PropertyName = failure.PropertyName,
+            ErrorCode = failure.ErrorCode,
+            ErrorMessage = failure.ErrorMessage,
+            AttemptedValue = failure.AttemptedValue,
+            Extensions = extensionValue
+        };
+        return modelValidationError;
     }
 
     private static string GetTraceId(HttpContext httpContext)

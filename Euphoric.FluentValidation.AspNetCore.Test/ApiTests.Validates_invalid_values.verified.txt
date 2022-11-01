@@ -11,13 +11,18 @@
           propertyName: Description,
           errorCode: LengthValidator,
           attemptedValue: 01234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789,
-          errorMessage: 'Description' must be between 1 and 100 characters. You entered 110 characters.
+          errorMessage: 'Description' must be between 1 and 100 characters. You entered 110 characters.,
+          MinLength: 1,
+          MaxLength: 100,
+          TotalLength: 110
         },
         {
           propertyName: Number,
           errorCode: ExclusiveBetweenValidator,
           attemptedValue: 25,
-          errorMessage: 'Number' must be between 10 and 20 (exclusive). You entered 25.
+          errorMessage: 'Number' must be between 10 and 20 (exclusive). You entered 25.,
+          From: 10,
+          To: 20
         },
         {
           propertyName: CustomerName,
@@ -47,7 +52,9 @@
           propertyName: Items[0].Price,
           errorCode: ExclusiveBetweenValidator,
           attemptedValue: 1000000,
-          errorMessage: 'Price' must be between 0 and 10000 (exclusive). You entered 1000000.
+          errorMessage: 'Price' must be between 0 and 10000 (exclusive). You entered 1000000.,
+          From: 0,
+          To: 10000
         }
       ],
       type: https://tools.ietf.org/html/rfc7231#section-6.5.1,
