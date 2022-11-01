@@ -1,0 +1,181 @@
+﻿{
+  Version: 1.1,
+  Status: 200 OK,
+  Content: {
+    Headers: {
+      Content-Type: application/json; charset=utf-8
+    },
+    Value: {
+      openapi: 3.0.1,
+      info: {
+        title: Euphoric.FluentValidation.AspNetCore.App,
+        version: 1.0
+      },
+      paths: {
+        /Order: {
+          post: {
+            tags: [
+              Order
+            ],
+            requestBody: {
+              content: {
+                application/json: {
+                  schema: null
+                },
+                text/json: {
+                  schema: null
+                },
+                application/*+json: {
+                  schema: null
+                }
+              }
+            },
+            responses: {
+              400: {
+                description: Bad Request,
+                content: {
+                  text/plain: {
+                    schema: null
+                  },
+                  application/json: {
+                    schema: null
+                  },
+                  text/json: {
+                    schema: null
+                  }
+                }
+              }
+            }
+          }
+        },
+        /Order/error: {
+          get: {
+            tags: [
+              Order
+            ],
+            responses: {
+              400: {
+                description: Bad Request,
+                content: {
+                  text/plain: {
+                    schema: null
+                  },
+                  application/json: {
+                    schema: null
+                  },
+                  text/json: {
+                    schema: null
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      components: {
+        schemas: {
+          ModelValidationError: {
+            type: object,
+            properties: {
+              propertyName: {
+                type: string
+              },
+              errorCode: {
+                type: string
+              },
+              attemptedValue: {
+                nullable: true
+              },
+              errorMessage: {
+                type: string
+              }
+            }
+          },
+          ModelValidationProblemDetails: {
+            type: object,
+            properties: {
+              type: {
+                type: string,
+                nullable: true
+              },
+              title: {
+                type: string,
+                nullable: true
+              },
+              status: {
+                type: integer,
+                format: int32,
+                nullable: true
+              },
+              detail: {
+                type: string,
+                nullable: true
+              },
+              instance: {
+                type: string,
+                nullable: true
+              },
+              errors: {
+                type: array,
+                items: null
+              }
+            }
+          },
+          Order: {
+            type: object,
+            properties: {
+              description: {
+                type: string,
+                nullable: true
+              },
+              customerName: {
+                type: string
+              },
+              number: {
+                type: integer,
+                format: int32
+              },
+              items: {
+                type: array,
+                items: null,
+                nullable: true
+              },
+              orderDetail: null
+            },
+            additionalProperties: false
+          },
+          OrderDetail: {
+            type: object,
+            properties: {
+              address: {
+                type: string
+              },
+              orderName: {
+                type: string
+              }
+            },
+            additionalProperties: false
+          },
+          OrderItem: {
+            type: object,
+            properties: {
+              name: {
+                type: string,
+                nullable: true
+              },
+              amount: {
+                type: integer,
+                format: int32
+              },
+              price: {
+                type: number,
+                format: double
+              }
+            },
+            additionalProperties: false
+          }
+        }
+      }
+    }
+  }
+}

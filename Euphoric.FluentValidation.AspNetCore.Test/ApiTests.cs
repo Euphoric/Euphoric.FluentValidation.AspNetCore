@@ -85,4 +85,12 @@ public class ApiTests : IClassFixture<TestServerFixture>
 
         await Verifier.Verify(response).AddScrubber(ScrubTraceId).AddScrubber(EscapeWhitespace).IgnoreMember("Request");
     }
+    
+    [Fact]
+    public async Task OpenApi_schema_specification()
+    {
+        var response = await Fixture.CreateClient().GetAsync("swagger/v1/swagger.json");
+
+        await Verifier.Verify(response).IgnoreMember("Request").UniqueForTargetFrameworkAndVersion();
+    }
 }

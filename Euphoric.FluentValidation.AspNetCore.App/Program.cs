@@ -8,7 +8,10 @@ public class Startup
     public void ConfigureServices(IServiceCollection service)
     {
         service.AddControllers();
-        service.AddSwaggerGen();
+        service.AddSwaggerGen(swgr =>
+        {
+            swgr.SupportNonNullableReferenceTypes();
+        });
         service.AddHealthChecks();
         
         service.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
@@ -16,15 +19,17 @@ public class Startup
         // Tested addon
         service.AddAutoFluentValidations();
     }
-    
+     
     public void Configure(IApplicationBuilder app)
     {
         app.UseRouting();
+        app.UseSwaggerUI();
         
         app.UseEndpoints(cfg =>
         {
             cfg.MapControllers();
             cfg.MapHealthChecks("/health");
+            cfg.MapSwagger();
         });
     }
 }
@@ -43,6 +48,7 @@ public class Program
         return Host.CreateDefaultBuilder(args)
             .ConfigureWebHost(web =>
             {
+                web.UseKestrel();
                 web.UseStartup<Startup>();
             });
     }

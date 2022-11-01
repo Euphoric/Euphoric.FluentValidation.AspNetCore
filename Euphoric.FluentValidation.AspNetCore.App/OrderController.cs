@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using System.Net;
+using FluentValidation;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
 // ReSharper disable UnusedType.Global
@@ -17,12 +18,14 @@ public class OrderController : ControllerBase
     }
 
     [HttpPost]
+    [ProducesResponseType(typeof(ModelValidationProblemDetails), (int)HttpStatusCode.BadRequest)]
     public string Post([FromBody]Order order)
     {
         return "OK";
     }
 
     [HttpGet("error")]
+    [ProducesResponseType(typeof(ModelValidationProblemDetails), (int)HttpStatusCode.BadRequest)]
     public string GetError()
     {
         var validationFailure = new ValidationFailure("CustomProperty", "Custom validation error.", "30");
