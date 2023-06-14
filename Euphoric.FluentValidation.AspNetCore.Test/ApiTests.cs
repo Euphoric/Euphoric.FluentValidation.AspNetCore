@@ -87,6 +87,24 @@ public class ApiTests : IClassFixture<TestServerFixture>
     }
     
     [Fact]
+    public async Task Get_with_route_parameter()
+    {
+        var httpClient = Fixture.CreateClient();
+        
+        var response = await httpClient.GetStringAsync("order/356c5592-efe7-4e4d-ac12-0d5329978439");
+        Assert.Equal("356c5592-efe7-4e4d-ac12-0d5329978439", response);
+    }
+    
+    [Fact]
+    public async Task Get_with_empty_route_parameter()
+    {
+        var httpClient = Fixture.CreateClient();
+        
+        var response = await httpClient.GetStringAsync("order/abcd");
+        Assert.Equal("356c5592-efe7-4e4d-ac12-0d5329978439", response);
+    }
+    
+    [Fact]
     public async Task OpenApi_schema_specification()
     {
         var response = await Fixture.CreateClient().GetAsync("swagger/v1/swagger.json");

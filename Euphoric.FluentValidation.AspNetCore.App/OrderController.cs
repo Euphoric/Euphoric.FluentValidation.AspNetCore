@@ -32,6 +32,12 @@ public class OrderController : ControllerBase
         validationFailure.ErrorCode = "CUSTOM_VALIDATION";
         throw new ValidationException(new List<ValidationFailure> { validationFailure });
     }
+    
+    [HttpGet("{id}")]
+    public string Get([FromRoute] Guid id)
+    {
+        return id.ToString();
+    }
 }
 
 public record Order(string? Description, string CustomerName, int Number, OrderItem[]? Items, OrderDetail OrderDetail);
