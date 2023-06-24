@@ -12,6 +12,8 @@
         <PackageLicenseUrl>https://github.com/Euphoric/Euphoric.FluentValidation.AspNetCore/blob/main/LICENSE</PackageLicenseUrl>
         <RepositoryUrl>https://github.com/Euphoric/Euphoric.FluentValidation.AspNetCore</RepositoryUrl>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <GenerateDocumentationFile>True</GenerateDocumentationFile>
+        <NoWarn>$(NoWarn);1591</NoWarn>
     </PropertyGroup>
 
     <ItemGroup>
