@@ -1,3 +1,4 @@
+using System;
 using System.Net;
 using System.Net.Http.Json;
 using System.Text;
@@ -5,17 +6,24 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using VerifyXunit;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace Euphoric.FluentValidation.AspNetCore;
 
 [UsesVerify]
-public class ApiTests : IClassFixture<TestServerFixture>
+public class ApiTests : IClassFixture<TestServerFixture>, IDisposable
 {
     private TestServerFixture Fixture { get; }
 
-    public ApiTests(TestServerFixture fixture)
+    public ApiTests(TestServerFixture fixture, ITestOutputHelper output)
     {
         Fixture = fixture;
+        Fixture.OutputHelper = output;
+    }
+    
+    public void Dispose()
+    {
+        Fixture.OutputHelper = null;
     }
     
     [Fact]
