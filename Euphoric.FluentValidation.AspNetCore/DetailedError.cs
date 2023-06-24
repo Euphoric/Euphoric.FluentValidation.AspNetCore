@@ -3,7 +3,10 @@ using System.Text.Json.Serialization;
 
 namespace Euphoric.FluentValidation.AspNetCore;
 
-public class ModelValidationError
+/// <summary>
+/// Contains details about validation error.
+/// </summary>
+public class DetailedError
 {
     public string PropertyName { get; set; } = null!;
     public string ErrorCode { get; set; } = null!;

@@ -114,7 +114,7 @@
       },
       components: {
         schemas: {
-          ModelValidationError: {
+          DetailedError: {
             type: object,
             properties: {
               propertyName: {
@@ -131,7 +131,7 @@
               }
             }
           },
-          ModelValidationProblemDetails: {
+          DetailedValidationProblemDetails: {
             type: object,
             properties: {
               type: {
@@ -156,8 +156,20 @@
                 nullable: true
               },
               errors: {
+                type: object,
+                additionalProperties: {
+                  type: array,
+                  items: {
+                    type: string
+                  }
+                },
+                nullable: true,
+                readOnly: true
+              },
+              detailedErrors: {
                 type: array,
-                items: null
+                items: null,
+                nullable: true
               }
             }
           },

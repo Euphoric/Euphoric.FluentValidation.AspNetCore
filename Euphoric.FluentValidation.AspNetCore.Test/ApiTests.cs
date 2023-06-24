@@ -102,6 +102,16 @@ public class ApiTests : IClassFixture<TestServerFixture>, IDisposable
         var response = await httpClient.GetStringAsync("order/356c5592-efe7-4e4d-ac12-0d5329978439");
         Assert.Equal("356c5592-efe7-4e4d-ac12-0d5329978439", response);
     }
+    
+    [Fact]
+    public async Task Request_parameter_parsing_error()
+    {
+        var httpClient = Fixture.CreateClient();
+        httpClient.DefaultRequestHeaders.Add("traceparent","00-37be1758609afda059cc901e1ba893ec-15476cceff3adf10-00");
+        
+        var response = await httpClient.GetAsync("order/invalid-guid");
+        await Verifier.Verify(response).AddScrubber(ScrubTraceId).AddScrubber(EscapeWhitespace).IgnoreMember("Request");
+    }
 
     [Fact]
     public async Task OpenApi_schema_specification()

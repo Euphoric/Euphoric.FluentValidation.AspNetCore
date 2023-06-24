@@ -6,7 +6,7 @@
       Content-Type: application/problem+json; charset=utf-8
     },
     Value: {
-      errors: [
+      detailedErrors: [
         {
           propertyName: Description,
           errorCode: LengthValidator,

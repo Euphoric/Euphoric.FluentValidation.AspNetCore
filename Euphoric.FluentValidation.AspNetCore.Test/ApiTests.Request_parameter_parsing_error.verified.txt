@@ -1,0 +1,20 @@
+﻿{
+  Version: 1.1,
+  Status: 400 Bad Request,
+  Content: {
+    Headers: {
+      Content-Type: application/problem+json; charset=utf-8
+    },
+    Value: {
+      type: https://tools.ietf.org/html/rfc7231#section-6.5.1,
+      title: One or more validation errors occurred.,
+      status: 400,
+      traceId: 00-37be1758609afda059cc901e1ba893ec-0000000000000000-00,
+      errors: {
+        id: [
+          The value 'invalid-guid' is not valid.
+        ]
+      }
+    }
+  }
+}
